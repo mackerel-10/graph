@@ -10,10 +10,10 @@ services:
       #   - network
   db:
     container_name: neo4j-db
-    image: neo4j:5.18.1
+    image: neo4j:5.18.1 # Lateset Version
     ports:
-      - 7474:7474
-      - 7687:7687
+      - 7474:7474 # HTTP
+      - 7687:7687 # Bolt
     env_file:
       - .env.local
     volumes:
