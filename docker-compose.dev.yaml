@@ -1,0 +1,20 @@
+services:
+  # app:
+  #   container_name: app
+  #   ports:
+  #     - '8000:8000'
+  #   env_file:
+  #     - .env.local
+      # depends
+      # networks:
+      #   - network
+  db:
+    container_name: neo4j-db
+    image: neo4j:5.18.0
+    ports:
+      - 7474:7474
+      - 7687:7687
+    env_file:
+      - .env.local
+    volumes:
+      - $HOME/Desktop/neo4j/data:/data
