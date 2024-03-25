@@ -4,7 +4,8 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-import { typeDefs, resolvers } from './schema';
+import typeDefs from './schema';
+import resolvers from './resolvers'
 import 'dotenv/config'
 
 const app = express();
@@ -28,6 +29,7 @@ const startServer = async () => {
 
   // Set up our Express middleware to handle CORS, body parsing,
   // and our expressMiddleware function.
+
   app.use(
     '/graphql',
     cors<cors.CorsRequest>(),
