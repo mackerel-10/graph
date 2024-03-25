@@ -1,4 +1,4 @@
-TypeScript & Neo4j
+> TypeScript & GraphQL(Apollo) & Neo4j
 
 ### Quick Start
 
@@ -18,5 +18,5 @@ make down
 ### ENV
 
 ```
-NEO4J_AUTH
+NEO4J_AUTH=
 ```
