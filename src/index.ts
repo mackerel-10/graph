@@ -5,33 +5,44 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import { typeDefs, resolvers } from './schema';
-
-interface MyContext {
-  token?: String;
-}
+import 'dotenv/config'
 
 const app = express();
-// Our httpServer handles incoming requests to our Express app.
-// Below, we tell Apollo Server to "drain" this httpServer,
-// enabling our servers to shut down gracefully.
-const httpServer = http.createServer(app);
 
-const server = new ApolloServer<MyContext>({
-  typeDefs,
-  resolvers,
-  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-});
-await server.start();
+// Required logic for integrating with Express
+const startServer = async () => {
+  // Our httpServer handles incoming requests to our Express app.
+  // Below, we tell Apollo Server to "drain" this httpServer,
+  // enabling our servers to shut down gracefully.
+  const httpServer = http.createServer(app);
 
-app.use(
-  '/graphql',
-  cors<cors.CorsRequest>(),
-  express.json(),
-  expressMiddleware(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
-  }),
-);
+  // Same ApolloServer initialization as before, plus the drain plugin
+  // for our httpServer.
+  const server = new ApolloServer<MyContext>({
+    typeDefs,
+    resolvers,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
+  // Ensure we wait for our server to start
+  await server.start();
 
-await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+  // Set up our Express middleware to handle CORS, body parsing,
+  // and our expressMiddleware function.
+  app.use(
+    '/graphql',
+    cors<cors.CorsRequest>(),
+    express.json(),
+    // expressMiddleware accepts the same arguments:
+    // an Apollo Server instance and optional configuration options
+    expressMiddleware(server, {
+      context: async ({ req }) => ({ token: req.headers.token }),
+    }),
+  );
 
-console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+  // Modified server startup
+  const port = parseInt(process.env.PORT);
+  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
+  console.log(`🚀 Server ready at http://localhost:${port}/`);
+}
+
+startServer();

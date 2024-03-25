@@ -1,0 +1,5 @@
+.gitignore
+Makefile
+
+dist/
+node_modules/
