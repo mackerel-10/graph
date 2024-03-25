@@ -3,6 +3,8 @@ DC = docker-compose
 DEV = docker-compose.dev.yaml
 
 # COMMAND
+
+# Docker Compose
 all: build up
 
 build:
@@ -13,3 +15,7 @@ up:
 
 down:
 	$(DC) -f $(DEV) down --rmi all
+
+# Src
+dev:
+	npm run dev
