@@ -1,26 +1,26 @@
 services:
-  app:
-    container_name: app
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    # volumes:
-    #   - ./src:/app/src
-    ports:
-      - 4000:4000
-    env_file:
-      - .env.local
-    command: "npm run dev"
+  # app:
+  #   container_name: app
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #   # volumes:
+  #   #   - ./src:/app/src
+  #   ports:
+  #     - 4000:4000
+  #   env_file:
+  #     - .env
+  #   command: "npm run dev"
     # depends_on:
     #   - db
-  # db:
-  #   container_name: neo4j-db
-  #   image: neo4j:5.18.1 # Lateset Version
-  #   ports:
-  #     - 7474:7474 # HTTP
-  #     - 7687:7687 # Bolt
-  #   env_file:
-  #     - .env.local
-  #   volumes:
-  #     - $HOME/Desktop/neo4j/data:/data
+  db:
+    container_name: neo4j-db
+    image: neo4j:5.18.1 # Lateset Version
+    ports:
+      - 7474:7474 # HTTP
+      - 7687:7687 # Bolt
+    env_file:
+      - .env
+    volumes:
+      - $HOME/Desktop/neo4j/data:/data
     
