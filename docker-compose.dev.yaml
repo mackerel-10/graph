@@ -5,7 +5,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     # volumes:
-    #   - ./src:/app/src
+    #   - ./dist:/app/dist
     ports:
       - 4000:4000
     env_file:
