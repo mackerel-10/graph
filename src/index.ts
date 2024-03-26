@@ -6,7 +6,7 @@ import http from 'http';
 import cors from 'cors';
 import typeDefs from './schema';
 import resolvers from './resolvers'
-import 'dotenv/config'
+import 'dotenv/config';
 
 const app = express();
 
@@ -42,9 +42,11 @@ const startServer = async () => {
   );
 
   // Modified server startup
-  const port = parseInt(process.env.PORT);
+  const port = parseInt(process.env.PORT)
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
   console.log(`🚀 Server ready at http://localhost:${port}/`);
 }
 
-startServer();
+(async () => {
+  await startServer();
+})();
