@@ -1,8 +1,13 @@
 // GraphQL schema
 const typeDefs = `
   #graphql
+  type Source {
+    _id: ID!
+    taskName: String
+  }
+
   type Query {
-    taskName(_id: ID!): String
+    hits(_id: ID!): Source
   }
 `;
 
