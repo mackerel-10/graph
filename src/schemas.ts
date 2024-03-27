@@ -1,7 +1,8 @@
 // GraphQL schema
-const typeDefs = ` #graphql
+const typeDefs = `
+  #graphql
   type Query {
-    hello: String
+    taskName(_id: ID!): String
   }
 `;
 
