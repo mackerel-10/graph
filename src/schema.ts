@@ -1,8 +1,8 @@
 // GraphQL schema
 const typeDefs = ` #graphql
-    type Query {
-        hello: String
-    }
+  type Query {
+    hello: String
+  }
 `;
 
 export default typeDefs;

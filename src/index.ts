@@ -5,7 +5,7 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import typeDefs from './schema';
-import resolvers from './resolvers'
+import resolvers from './resolvers';
 import 'dotenv/config';
 import client from './opensearch';
 import env from './config';
@@ -20,19 +20,21 @@ const startServer = async () => {
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   await server.start();
+
   app.use(
     '/graphql',
     cors<cors.CorsRequest>(),
     express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => ({ token: req.headers.token }),
-    }),
+    })
   );
 
   const { serverPort } = env;
-  await new Promise<void>((resolve) => httpServer.listen({ port: serverPort }, resolve));
-  console.log(`🚀 Server ready at http://localhost:${serverPort}/`);
-}
+  httpServer.listen({ port: serverPort }, () => {
+    console.log(`🚀 Server ready at http://localhost:${serverPort}/`);
+  });
+};
 
 (async () => {
   await startServer();
@@ -44,7 +46,7 @@ const testConnectionWithOpenSearch = async () => {
     const query = {
       query: {
         match: {
-          id: '2xVfeo4BWE96sU4Q3dZk'
+          id: '2xVfeo4BWE96sU4Q3dZk',
         },
       },
     };
@@ -53,14 +55,11 @@ const testConnectionWithOpenSearch = async () => {
       index: 'etw',
       body: query,
     });
-    
-    console.log(response);
-    console.log(response.body);
     console.log(response.body.hits);
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 (async () => {
   await testConnectionWithOpenSearch();

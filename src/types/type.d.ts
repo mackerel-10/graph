@@ -1,3 +1,3 @@
 interface MyContext {
-    token?: String;
+  token?: String;
 }
