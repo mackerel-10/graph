@@ -1,12 +1,15 @@
 import { Client } from '@opensearch-project/opensearch';
+import env from './config';
 
-const host = process.env.HOST;
-const protocol = process.env.PROTOCOL;
-const port = process.env.OPENSEARCH_PORT;
-const auth = process.env.AUTH;
+const {
+  openSearchHost,
+  openSearchProtocol,
+  openSearchPort,
+  openSearchAuth } = env;
 
 const client = new Client({
-  node: protocol + '://' + auth + '@' + host + ':' + port,
+  node: openSearchProtocol + '://' + openSearchAuth
+    + '@' + openSearchHost + ':' + openSearchPort,
   ssl: { // Turn off the certificate verification
     rejectUnauthorized: false,
   },

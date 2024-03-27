@@ -8,6 +8,7 @@ import typeDefs from './schema';
 import resolvers from './resolvers'
 import 'dotenv/config';
 import client from './opensearch';
+import env from './config';
 
 const app = express();
 
@@ -27,9 +28,10 @@ const startServer = async () => {
       context: async ({ req }) => ({ token: req.headers.token }),
     }),
   );
-  const port = parseInt(process.env.SERVER_PORT)
-  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
-  console.log(`🚀 Server ready at http://localhost:${port}/`);
+
+  const { serverPort } = env;
+  await new Promise<void>((resolve) => httpServer.listen({ port: serverPort }, resolve));
+  console.log(`🚀 Server ready at http://localhost:${serverPort}/`);
 }
 
 (async () => {
@@ -42,9 +44,7 @@ const testConnectionWithOpenSearch = async () => {
     const query = {
       query: {
         match: {
-          id: {
-            query: '2xVfeo4BWE96sU4Q3dZk',
-          },
+          id: '2xVfeo4BWE96sU4Q3dZk'
         },
       },
     };
@@ -55,6 +55,8 @@ const testConnectionWithOpenSearch = async () => {
     });
     
     console.log(response);
+    console.log(response.body);
+    console.log(response.body.hits);
   } catch (error) {
     console.error(error);
   }
