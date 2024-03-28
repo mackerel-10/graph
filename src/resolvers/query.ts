@@ -1,4 +1,3 @@
-import { query } from 'express';
 import client from '../opensearch';
 
 const Query = {
@@ -28,7 +27,7 @@ const Query = {
       if (_ids) {
         const query = {
           terms: {
-            _id: [..._ids],
+            _id: _ids,
           },
         };
         queryList.push(query);

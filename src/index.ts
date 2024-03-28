@@ -29,7 +29,7 @@ const startServer = async () => {
 
   const { serverPort } = env;
   httpServer.listen({ port: serverPort }, () => {
-    console.log(`🚀 Server ready at http://localhost:${serverPort}/`);
+    console.log(`🌚 Server ready at http://localhost:${serverPort}/`);
   });
 };
 

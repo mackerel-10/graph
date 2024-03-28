@@ -12,6 +12,11 @@ const Source = {
 
     return _source.ProcessGuid;
   },
+  eventHeader: (parent: Hit) => {
+    const { _source } = parent;
+
+    return _source.EventHeader;
+  },
 };
 
 export default Source;

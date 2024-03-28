@@ -1,12 +1,17 @@
 #graphql
 
+type Query {
+  hit(_id: ID!): Source
+  hits(_ids: [ID], processGuid: String): [Source]
+}
+
 type Source {
   _id: ID!
   taskName: String
   processGuid: String
+  eventHeader: EventHeader
 }
 
-type Query {
-  hit(_id: ID!): Source
-  hits(_ids: [ID], processGuid: String): [Source]
+type EventHeader {
+  size: Int
 }

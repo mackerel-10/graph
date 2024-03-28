@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import Query from './resolvers/query';
 import Source from './resolvers/source';
+import EventHeader from './resolvers/eventHeader';
 
 const typeDefs = readFileSync('./src/schemas.graphql', 'utf-8');
 
@@ -8,6 +9,7 @@ const typeDefs = readFileSync('./src/schemas.graphql', 'utf-8');
 const resolvers = {
   Query,
   Source,
+  EventHeader,
 };
 
 export { typeDefs, resolvers };
