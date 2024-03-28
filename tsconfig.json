@@ -1,5 +1,4 @@
 {
-  "include": ["./src"],
   "compilerOptions": {
     "rootDirs": ["src"],
     "outDir": "dist",
@@ -12,4 +11,6 @@
     // "typeRoots": ["node_modules/@types", "src/types"]
   },
   "ts-node": { "files": true }
+  // "include": ["./src"],
+  // "files": ["src/types/grpahql.d.ts"]
 }

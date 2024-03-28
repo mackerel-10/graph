@@ -4,10 +4,8 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-import typeDefs from './schemas';
-import resolvers from './resolvers';
-import 'dotenv/config';
 import env from './config';
+import { typeDefs, resolvers } from './graphql';
 
 const app = express();
 

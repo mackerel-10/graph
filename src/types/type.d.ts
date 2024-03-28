@@ -1,9 +1,6 @@
-interface MyContext {
-  token?: String;
-}
-
 type Args = {
   _id?: string;
+  _ids?: [string];
 };
 
 type Hit = {
