@@ -1,4 +1,7 @@
 const Source = {
+  _id: (parent: Hit) => {
+    return parent._id;
+  },
   taskName: (parent: Hit) => {
     const { _source } = parent;
 

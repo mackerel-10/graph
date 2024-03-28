@@ -1,6 +1,7 @@
 type Args = {
   _id?: string;
   _ids?: [string];
+  processGuid: string;
 };
 
 type Hit = {
@@ -52,4 +53,12 @@ type EventDescriptor = {
   Opcode: number;
   Task: number;
   Keyword: number;
+};
+
+type Body = {
+  query: {
+    term?: Object;
+    terms?: Object;
+    multi_match?: Object;
+  };
 };

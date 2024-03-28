@@ -8,4 +8,5 @@ type Source {
 
 type Query {
   hit(_id: ID!): Source
+  hits(_ids: [ID], processGuid: String): [Source]
 }
