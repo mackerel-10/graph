@@ -2,11 +2,11 @@ import client from './opensearch';
 
 // A map of functions which return data for the schema
 const resolvers = {
+  // Parameters: parent, args, contextValue, info
   Query: {
-    hits: async (parent: undefined, args: Task, contextValue, info) => {
+    hit: async (parent: undefined, args: Args, contextValue, info) => {
       try {
         const { _id } = args;
-        console.log(parent, _id, contextValue, info);
         const query = {
           query: {
             match: {
@@ -17,22 +17,24 @@ const resolvers = {
 
         const response = await client.search({ body: query });
         const { hits } = response.body.hits;
-        // console.log(hits[0]._source);
-        return hits[0]._source;
+        return hits[0];
       } catch (error) {
         console.error(error);
       }
     },
   },
   Source: {
-    taskName: (parent: Source) => {
-      return parent['Task Name'];
+    taskName: (parent: Hit) => {
+      const { _source } = parent;
+
+      return _source['Task Name'];
+    },
+    processGuid: (parent: Hit) => {
+      const { _source } = parent;
+
+      return _source.ProcessGuid;
     },
   },
-};
-
-const Source = {
-  source: () => {},
 };
 
 export default resolvers;

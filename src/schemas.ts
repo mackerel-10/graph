@@ -4,10 +4,11 @@ const typeDefs = `
   type Source {
     _id: ID!
     taskName: String
+    processGuid: String
   }
 
   type Query {
-    hits(_id: ID!): Source
+    hit(_id: ID!): Source
   }
 `;
 

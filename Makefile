@@ -17,6 +17,8 @@ down:
 	$(DC) -f $(DEV) down --rmi all
 
 # Src
+prod:
+	npm start
 dev:
 	npm run dev
 clean:

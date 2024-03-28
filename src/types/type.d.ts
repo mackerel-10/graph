@@ -2,8 +2,20 @@ interface MyContext {
   token?: String;
 }
 
-type Task = {
-  _id: String;
+type Args = {
+  _id?: string;
+};
+
+type Hit = {
+  _index: string;
+  _id: string;
+  _version: number;
+  _score: null;
+  _source: Source;
+  fields: {
+    UtcTime: [Date]; // ['2024-03-26T10:48:09.735Z']
+  };
+  sort: [number];
 };
 
 type Source = {
@@ -21,24 +33,26 @@ type Source = {
 };
 
 type EventHeader = {
-  Size: 412;
-  HeaderType: 0;
-  Flags: 576;
-  EventProperty: 0;
-  ThreadId: 5532;
-  ProcessId: 4452;
-  TimeStamp: 133559236897711760;
-  ProviderId: '{5770385F-C22A-43E0-BF4C-06F5698FFBD9}';
-  EventDescriptor: {
-    Id: 17;
-    Version: 1;
-    Channel: 16;
-    Level: 4;
-    Opcode: 0;
-    Task: 17;
-    Keyword: 9223372036854776000;
-  };
-  KernelTime: 1244;
-  UserTime: 1668;
-  ActivityId: '{00000000-0000-0000-0000-000000000000}';
+  Size: number;
+  HeaderType: number;
+  Flags: number;
+  EventProperty: number;
+  ThreadId: number;
+  ProcessId: number;
+  TimeStamp: number;
+  ProviderId: string;
+  EventDescriptor: EventDescriptor;
+  KernelTime: number;
+  UserTime: number;
+  ActivityId: string;
+};
+
+type EventDescriptor = {
+  Id: number;
+  Version: number;
+  Channel: number;
+  Level: number;
+  Opcode: number;
+  Task: number;
+  Keyword: number;
 };
