@@ -1,25 +1,17 @@
 import client from "../opensearch";
+import searchEvent from "../db/searchEvent";
 
 const Query = {
-  hit: async (parent: undefined, args: Args, contextValue, info) => {
+  event: async (parent: undefined, args: Args, contextValue, info) => {
     try {
-      const { _id } = args;
-      const query = {
-        query: {
-          term: {
-            _id,
-          },
-        },
-      };
+      const data = await searchEvent(args);
 
-      const response = await client.search({ body: query });
-      const { hits } = response.body.hits;
-      return hits[0];
+      return data;
     } catch (error) {
       console.error(error);
     }
   },
-  hits: async (parent: undefined, args: Args, contextValue, info) => {
+  events: async (parent: undefined, args: Args, contextValue, info) => {
     try {
       const { _ids, processGuid, taskName } = args;
       let queryList = [];
@@ -59,6 +51,15 @@ const Query = {
       const response = await client.search({ body });
       const { hits } = response.body.hits;
       return hits;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  procedures: async (parent, args: Args) => {
+    try {
+      const data = await searchEvent(args);
+
+      return data;
     } catch (error) {
       console.error(error);
     }
