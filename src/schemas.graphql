@@ -1,15 +1,20 @@
 #graphql
-
 type Query {
-  hit(_id: ID!): Source
-  hits(_ids: [ID], processGuid: String): [Source]
+  hit(_id: ID!): SysmonEvent
+  hits(_ids: [ID], processGuid: String, taskName: String): [SysmonEvent]
+  procedures(currentProcessGuid: String): SysmonEvent
+}
+
+type SysmonEvent {
+  _id: ID!
+  _source: Source
 }
 
 type Source {
-  _id: ID!
+  eventHeader: EventHeader
   taskName: String
   processGuid: String
-  eventHeader: EventHeader
+  parentProcessGuid: String
 }
 
 type EventHeader {

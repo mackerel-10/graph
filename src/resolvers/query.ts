@@ -1,4 +1,4 @@
-import client from '../opensearch';
+import client from "../opensearch";
 
 const Query = {
   hit: async (parent: undefined, args: Args, contextValue, info) => {
@@ -21,7 +21,7 @@ const Query = {
   },
   hits: async (parent: undefined, args: Args, contextValue, info) => {
     try {
-      const { _ids, processGuid } = args;
+      const { _ids, processGuid, taskName } = args;
       let queryList = [];
 
       if (_ids) {
@@ -31,10 +31,18 @@ const Query = {
           },
         };
         queryList.push(query);
-      } else {
+      } else if (processGuid) {
         const query = {
           term: {
             ProcessGuid: processGuid,
+          },
+        };
+        queryList.push(query);
+      } else if (taskName) {
+        // Search Event with RuleName & ParentProcessGuid
+        const query: OpenSearchQuery = {
+          fuzzy: {
+            "Task Name": taskName,
           },
         };
         queryList.push(query);

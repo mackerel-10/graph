@@ -1,21 +1,15 @@
 const Source = {
-  _id: (parent: Hit) => {
-    return parent._id;
+  eventHeader: (parent: Source) => {
+    return parent.EventHeader;
   },
-  taskName: (parent: Hit) => {
-    const { _source } = parent;
-
-    return _source['Task Name'];
+  taskName: (parent: Source) => {
+    return parent["Task Name"];
   },
-  processGuid: (parent: Hit) => {
-    const { _source } = parent;
-
-    return _source.ProcessGuid;
+  processGuid: (parent: Source) => {
+    return parent.ProcessGuid;
   },
-  eventHeader: (parent: Hit) => {
-    const { _source } = parent;
-
-    return _source.EventHeader;
+  parentProcessGuid: (parent: Source) => {
+    return parent.ParentProcessGuid;
   },
 };
 

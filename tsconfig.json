@@ -7,10 +7,12 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["node"]
-    // "typeRoots": ["node_modules/@types", "src/types"]
+    "types": ["node"],
+//    "skipLibCheck": true
+//     "typeRoots": ["node_modules/@types", "src/types"]
   },
-  "ts-node": { "files": true }
+  "ts-node": { "files": true },
+
   // "include": ["./src"],
   // "files": ["src/types/grpahql.d.ts"]
 }

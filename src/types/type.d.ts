@@ -1,10 +1,12 @@
 type Args = {
   _id?: string;
   _ids?: [string];
-  processGuid: string;
+  processGuid?: string;
+  taskName?: string;
 };
 
-type Hit = {
+// EVENT
+type SysmonEvent = {
   _index: string;
   _id: string;
   _version: number;
@@ -16,9 +18,10 @@ type Hit = {
   sort: [number];
 };
 
+// _source
 type Source = {
   EventHeader: EventHeader;
-  'Task Name': string;
+  "Task Name": string;
   RuleName: string;
   EventType: string;
   UtcTime: string;
@@ -28,8 +31,10 @@ type Source = {
   Image: string;
   User: string;
   Description: string;
+  ParentProcessGuid: string;
 };
 
+// _source.EventHeader
 type EventHeader = {
   Size: number;
   HeaderType: number;
