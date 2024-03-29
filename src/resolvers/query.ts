@@ -1,5 +1,5 @@
 import client from "../opensearch";
-import searchEvent from "../db/searchEvent";
+import { searchEvent, searchEvents } from "../db/searchEvent";
 
 const Query = {
   event: async (parent: undefined, args: Args, contextValue, info) => {
@@ -57,9 +57,29 @@ const Query = {
   },
   procedures: async (parent, args: Args) => {
     try {
-      const data = await searchEvent(args);
+      const query = {
+        query: {
+          bool: {
+            must: [
+              {
+                term: {
+                  ...args,
+                },
+              },
+              {
+                term: {
+                  "Task Name": "PROCESSCREATE",
+                },
+              },
+            ],
+          },
+        },
+      };
 
-      return data;
+      const data = await client.search({ body: query });
+      const event = data.body.hits.hits;
+
+      return event;
     } catch (error) {
       console.error(error);
     }
